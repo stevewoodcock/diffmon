@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090412153914) do
+ActiveRecord::Schema.define(:version => 20090412191719) do
 
   create_table "urls", :force => true do |t|
     t.text     "url"
@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(:version => 20090412153914) do
     t.datetime "last_modified"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "prior_content"
   end
 
 end

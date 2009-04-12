@@ -10,15 +10,17 @@ class Url < ActiveRecord::Base
       err = stderr.read
       out = stdout.read
     end
-    if err != ''
-      raise err
-    else
-      return out
-    end
+    raise err if err != ''
+    out
   end
 
   def update_content
-    self.content = get_content
-    save
+    content = get_content
+    if content != self.content
+      self.prior_content = self.content
+      self.content = content
+      self.last_modified = Time.now
+      save
+    end
   end
 end
