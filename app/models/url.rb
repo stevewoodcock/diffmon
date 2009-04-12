@@ -1,6 +1,7 @@
 require 'open3'
+
 class Url < ActiveRecord::Base
-  def fetch_content
+  def get_content
     cmd = "lynx -display_charset=utf8 -dump -nolist #{self.url}"
     out = ''
     err = ''
@@ -12,8 +13,12 @@ class Url < ActiveRecord::Base
     if err != ''
       raise err
     else
-      self.content = out
-      save
+      return out
     end
+  end
+
+  def update_content
+    self.content = get_content
+    save
   end
 end

@@ -1,6 +1,4 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-djangobook:
-  url: http://www.djangobook.com/en/2.0/
+google:
+  url: file://<%= RAILS_ROOT %>/test/fixtures/google.html
   content:
   last_modified:

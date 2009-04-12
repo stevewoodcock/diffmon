@@ -1,11 +1,15 @@
 require 'test_helper'
 
 class UrlTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
   test "should fetch url content" do
-    url = urls(:djangobook)
-    url.fetch_content
-    assert_not_nil url.content
-    assert_match /Caching/, url.content
+    content = urls(:google).get_content
+    assert_not_nil content
+    assert_match /About Google/, content
+  end
+
+  test "should notice content has changed" do
+    url = urls(:google)
+    url.update_content
+    assert url.content
   end
 end
