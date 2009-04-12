@@ -1,11 +1,6 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  url: MyText
-  content: MyText
-  last_modified: 2009-04-12 16:39:14
-
-two:
-  url: MyText
-  content: MyText
-  last_modified: 2009-04-12 16:39:14
+djangobook:
+  url: http://www.djangobook.com/en/2.0/
+  content:
+  last_modified:
