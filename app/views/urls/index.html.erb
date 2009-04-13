@@ -1,0 +1,9 @@
+<p><%= link_to "Atom feed", formatted_urls_url(:atom) %></p>
+<ul>
+<% for url in @urls %>
+<li>
+<%= h url.url %>
+<%= url.last_modified %>
+</li>
+<% end %>
+</ul>
