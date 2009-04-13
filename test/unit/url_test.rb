@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'mocha'
 
 class UrlTest < ActiveSupport::TestCase
   test "should fetch url content" do
@@ -20,5 +21,15 @@ class UrlTest < ActiveSupport::TestCase
     last = url.last_modified
     url.update_content
     assert_equal last, url.last_modified, "Last modified should not change"
+  end
+
+  test "should save diff when content changes" do
+    url = urls(:google)
+    url.expects(:get_content).returns("abc\n")
+    url.update_content
+    url.expects(:get_content).returns("def\n")
+    url.update_content
+    assert_match /^-abc/, url.diff
+    assert_match /^\+def/, url.diff
   end
 end
