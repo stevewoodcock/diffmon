@@ -6,4 +6,8 @@ class UrlsController < ApplicationController
       format.atom
     end
   end
+
+  def show
+    @the_url = Url.find(params[:id])
+  end
 end
