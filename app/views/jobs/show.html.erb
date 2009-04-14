@@ -1,0 +1,5 @@
+<%= link_to @job.url, @job.url %>
+<%= @job.last_modified %>
+<pre>
+<%= @job.diff || @job.content %>
+</pre>

@@ -1,6 +1,6 @@
 require 'open3'
 
-class Url < ActiveRecord::Base
+class Job < ActiveRecord::Base
   def get_content
     cmd = "lynx -display_charset=utf8 -dump -nolist #{self.url}"
     out = ''
@@ -42,7 +42,7 @@ class Url < ActiveRecord::Base
   end
 
   def self.update_all_content
-    Url.all.each do |url|
+    Job.all.each do |url|
       url.update_content
     end
   end

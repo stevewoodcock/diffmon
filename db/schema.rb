@@ -9,9 +9,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090413081937) do
+ActiveRecord::Schema.define(:version => 20090414193726) do
 
-  create_table "urls", :force => true do |t|
+  create_table "jobs", :force => true do |t|
     t.text     "url"
     t.text     "content"
     t.datetime "last_modified"

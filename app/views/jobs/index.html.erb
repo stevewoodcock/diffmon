@@ -1,0 +1,13 @@
+<p><%= link_to "Atom feed", jobs_url(:atom) %></p>
+
+<p><%= link_to "Add job", new_job_url %></p>
+
+<ul>
+<% for job in @jobs %>
+<li>
+<%= h job.url %>
+<%= job.last_modified %>
+<%= link_to "details", job_url(job) %>
+</li>
+<% end %>
+</ul>
