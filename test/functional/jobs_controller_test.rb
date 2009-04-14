@@ -16,4 +16,14 @@ class JobsControllerTest < ActionController::TestCase
     get(:show, {:id => jobs(:google)})
     assert_response :success
   end
+
+  test "should show new job form" do
+    get :new
+    assert_response :success
+  end
+
+  test "should create job" do
+    post :create, :post => { :url => 'abc' }
+    assert_redirected_to jobs_url
+  end
 end

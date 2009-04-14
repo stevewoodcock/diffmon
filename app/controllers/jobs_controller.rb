@@ -12,7 +12,15 @@ class JobsController < ApplicationController
   end
 
   def new
-    @jobs = Job.new
+    @job = Job.new
+  end
+
+  def create
+    @job = Job.new(params[:job])
+    if @job.save
+      flash[:notice] = 'Job added'
+      redirect_to jobs_url
+    end
   end
 
 end
