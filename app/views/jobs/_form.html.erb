@@ -1,4 +1,5 @@
 <% form_for(@job) do |f| %>
+<p><%= f.error_messages %></p>
 <ul>
 <li><%= f.label :url %>
 <%= f.text_field :url %>

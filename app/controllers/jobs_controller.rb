@@ -20,6 +20,8 @@ class JobsController < ApplicationController
     if @job.save
       flash[:notice] = 'Job added'
       redirect_to jobs_url
+    else
+      render :action => :new
     end
   end
 

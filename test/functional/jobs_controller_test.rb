@@ -22,8 +22,4 @@ class JobsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create job" do
-    post :create, :post => { :url => 'abc' }
-    assert_redirected_to jobs_url
-  end
 end

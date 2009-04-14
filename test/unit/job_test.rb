@@ -38,4 +38,10 @@ class JobTest < ActiveSupport::TestCase
     Job.update_all_content
     assert_equal Job.count, Job.count(:conditions => ["last_modified > ?", 1.minute.ago])
   end
+
+  test "should require valid url" do
+    job = Job.new(:url => 'abc')
+    assert !job.save
+    assert job.errors.on(:url)
+  end
 end

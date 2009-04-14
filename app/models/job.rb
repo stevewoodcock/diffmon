@@ -1,6 +1,8 @@
 require 'open3'
 
 class Job < ActiveRecord::Base
+  validates_format_of :url, :with => /^\w+:\/\/.+/
+
   def get_content
     cmd = "lynx -display_charset=utf8 -dump -nolist #{self.url}"
     out = ''
