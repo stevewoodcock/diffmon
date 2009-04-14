@@ -32,4 +32,10 @@ class UrlTest < ActiveSupport::TestCase
     assert_match /^-abc/, url.diff
     assert_match /^\+def/, url.diff
   end
+
+  test "should update all content" do
+    Url.any_instance.stubs(:get_content).returns("some content")
+    Url.update_all_content
+    assert_equal Url.count, Url.count(:conditions => ["last_modified > ?", 1.minute.ago])
+  end
 end

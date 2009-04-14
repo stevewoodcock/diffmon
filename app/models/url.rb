@@ -40,4 +40,10 @@ class Url < ActiveRecord::Base
       save
     end
   end
+
+  def self.update_all_content
+    Url.all.each do |url|
+      url.update_content
+    end
+  end
 end
