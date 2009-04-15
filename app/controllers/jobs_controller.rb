@@ -33,4 +33,18 @@ class JobsController < ApplicationController
     flash[:notice] = 'Job deleted'
     redirect_to jobs_url
   end
+
+  def edit
+    @job = Job.find(params[:id])
+  end
+
+  def update
+    @job = Job.find(params[:id])
+    if @job.update_attributes(params[:job])
+      flash[:notice] = 'Job updated'
+      redirect_to @job
+    else
+      render :action => 'edit'
+    end
+  end
 end

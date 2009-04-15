@@ -26,4 +26,9 @@ class JobsControllerTest < ActionController::TestCase
     delete :destroy, :id => jobs(:google)
     assert_redirected_to jobs_path
   end
+
+  test "should show job edit form" do
+    get :edit, :id => jobs(:google)
+    assert_response :success
+  end
 end
