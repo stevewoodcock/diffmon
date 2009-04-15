@@ -6,6 +6,10 @@
 <title>Diffmon</title>
 </head>
 <body>
+<ul>
+<li><%= link_to "All jobs", jobs_path %></li>
+<li><%= link_to "Atom feed", jobs_url(:atom) %></li>
+</ul>
 <%= yield %>
 </body>
 </html>
