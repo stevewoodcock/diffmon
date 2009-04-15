@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+  layout 'main'
+
   def index
     @jobs = Job.find(:all, :order => 'last_modified desc')
     respond_to do |format|
