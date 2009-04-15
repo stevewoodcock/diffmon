@@ -1,5 +1,12 @@
-<%= link_to @job.url, @job.url %>
-<%= @job.last_modified %>
+<h1>Job <%= @job.id %></h1>
+
+<p>Url: <%= link_to @job.url, @job.url %></p>
+
+<p>Last modified: <%= @job.last_modified %></p>
+
+<h2>Content</h2>
 <pre>
 <%= @job.diff || @job.content %>
 </pre>
+
+<%= button_to "Delete job", { :action => 'destroy', :id => @job }, :method => :delete, :confirm => 'Are you sure?' %>

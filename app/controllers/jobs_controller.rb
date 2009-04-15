@@ -25,4 +25,10 @@ class JobsController < ApplicationController
     end
   end
 
+  def destroy
+    @job = Job.find(params[:id])
+    @job.destroy
+    flash[:notice] = 'Job deleted'
+    redirect_to jobs_url
+  end
 end

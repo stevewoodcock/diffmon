@@ -22,4 +22,8 @@ class JobsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should delete job" do
+    delete :destroy, :id => jobs(:google)
+    assert_redirected_to jobs_path
+  end
 end
