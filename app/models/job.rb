@@ -5,15 +5,9 @@ class Job < ActiveRecord::Base
 
   def get_content
     cmd = "lynx -display_charset=utf8 -dump -nolist #{self.url}"
-    out = ''
-    err = ''
-    Open3.popen3(cmd) do |stdin, stdout, stderr|
-      stdin.close
-      err = stderr.read
-      out = stdout.read
-    end
-    raise err if err != ''
-    out
+    status, stdout, stderr = systemu cmd
+    raise stderr if stderr != ''
+    stdout
   end
 
   def update_content
@@ -25,19 +19,12 @@ class Job < ActiveRecord::Base
       if self.prior_content
         content_tmp = Tempfile.new('content')
         content_tmp.write content
-        content_tmp.close
+        content_tmp.flush
         cmd = "diff --unified - #{content_tmp.path}"
-        out = ''
-        err = ''
-        Open3.popen3(cmd) do |stdin, stdout, stderr|
-          stdin.write prior_content
-          stdin.close
-          err = stderr.read
-          out = stdout.read
-        end
+        status = systemu cmd, 0=>prior_content, 1=>stdout='', 2=>stderr=''
         content_tmp.close!
-        raise err if err != ''
-        self.diff = out
+        raise stderr if stderr != ''
+        self.diff = stdout
       end
       save
     end
