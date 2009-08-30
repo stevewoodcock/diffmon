@@ -47,4 +47,10 @@ class JobsController < ApplicationController
       render :action => 'edit'
     end
   end
+
+  def update_content
+    @job = Job.find(params[:id])
+    @job.update_content
+    redirect_to @job
+  end
 end

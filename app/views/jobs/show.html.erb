@@ -11,4 +11,5 @@
 <%= @job.diff || @job.content %>
 </pre>
 
+<%= button_to "Update content", update_content_job_path(@job) %>
 <%= button_to "Delete job", { :action => 'destroy', :id => @job }, :method => :delete, :confirm => 'Are you sure?' %>

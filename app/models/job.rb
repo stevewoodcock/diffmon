@@ -4,7 +4,7 @@ class Job < ActiveRecord::Base
   validates_format_of :url, :with => /^\w+:\/\/.+/
 
   def get_content
-    cmd = "lynx -display_charset=utf8 -dump -nolist #{self.url}"
+    cmd = "/opt/local/bin/lynx -display_charset=utf8 -dump -nolist '#{self.url}'"
     status, stdout, stderr = systemu cmd
     raise stderr if stderr != ''
     stdout

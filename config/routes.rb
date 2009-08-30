@@ -11,7 +11,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   map.resources :products
-  map.resources :jobs
+  map.resources :jobs, :member => { :update_content => :post }
   map.root :controller => "jobs"
 
   # Sample resource route with options:
