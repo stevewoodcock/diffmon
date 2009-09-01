@@ -2,7 +2,10 @@
 <p><%= f.error_messages %></p>
 <ul>
 <li><%= f.label :url %>
-<%= f.text_field :url %>
+<%= f.text_field :url, :size => 100 %>
+</li>
+<li><%= f.label :regexp %>
+<%= f.text_field :regexp %>
 </li>
 <li><%= f.submit %></li>
 </ul>

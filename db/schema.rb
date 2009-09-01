@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090829191406) do
+ActiveRecord::Schema.define(:version => 20090831194513) do
 
   create_table "jobs", :force => true do |t|
     t.text     "url"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20090829191406) do
     t.datetime "updated_at"
     t.text     "prior_content"
     t.text     "diff"
+    t.text     "regexp"
   end
 
 end

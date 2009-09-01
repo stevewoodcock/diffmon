@@ -44,4 +44,37 @@ class JobTest < ActiveSupport::TestCase
     assert !job.save
     assert job.errors.on(:url)
   end
+
+  test "filtered content" do
+    job = jobs(:google)
+    job.regexp = '(\d+)$'
+    job.content = "testing 123\n"
+    job.prior_content = "testing\n"
+    assert_equal "123", job.filtered_content
+    assert_equal nil, job.filtered_prior_content
+  end
+
+  test "diff respects regexp if set" do
+    job = jobs(:google)
+    job.regexp = '(\d+)$'
+    job.content = "testing 123\n"
+    job.prior_content = "testing 456\n"
+    diff = job.get_diff
+    assert_match /^-456/, diff
+    assert_match /^\+123/, diff
+  end
+
+  test "diff is recalculated with regexp changes" do
+    job = jobs(:google)
+    job.expects(:get_content).returns("abc\ndef")
+    job.update_content
+    job.expects(:get_content).returns("abc\ntada\ndef")
+    job.update_content
+    job.regexp = "tada"
+    job.save
+    assert_match /^\+tada/, job.diff
+    job.regexp = "todo"
+    job.save
+    assert_equal "", job.diff
+  end
 end
