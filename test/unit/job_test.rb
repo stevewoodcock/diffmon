@@ -70,11 +70,37 @@ class JobTest < ActiveSupport::TestCase
     job.update_content
     job.expects(:get_content).returns("abc\ntada\ndef")
     job.update_content
-    job.regexp = "tada"
+    job.regexp = "(tada)"
     job.save
     assert_match /^\+tada/, job.diff
-    job.regexp = "todo"
+    job.regexp = "(todo)"
     job.save
     assert_equal "", job.diff
   end
+
+  test "regexp is case insensitive and multiline" do
+    job = jobs(:google)
+    job.expects(:get_content).returns("abc\ndef")
+    job.update_content
+    job.expects(:get_content).returns("abc\TADA\nline2\n\ndef")
+    job.update_content
+    job.regexp = "(tada.*)\n\n"
+    job.save
+    assert_match /\+TADA\n\+line2/m, job.diff
+  end
+
+  test "regexp filters on first bracket else full match" do
+    job = jobs(:google)
+    job.expects(:get_content).returns("abc\ndef")
+    job.update_content
+    job.expects(:get_content).returns("abc\nlooooooooooong\ndef")
+    job.update_content
+    job.regexp = "lo+ng"
+    job.save
+    assert_match /\+lo+ng/, job.diff
+    job.regexp = "l(o+)ng"
+    job.save
+    assert_match /\+o+$/, job.diff
+  end
+
 end

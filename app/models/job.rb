@@ -43,10 +43,11 @@ class Job < ActiveRecord::Base
 
   def filter(text)
     return text if self.regexp.blank?
-    re = Regexp.new(self.regexp)
+    re = Regexp.new(self.regexp, Regexp::IGNORECASE | Regexp::MULTILINE)
     match = text.match(re)
-    return match[0] if match
-    return nil
+    return nil unless match
+    return match[1] if match.length > 1
+    return match[0]
   end
 
   def maybe_update_diff
